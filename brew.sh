@@ -13,6 +13,7 @@ brew upgrade
 BREW_PREFIX=$(brew --prefix)
 
 # Install languages
+brew install zsh
 brew install php
 brew install node
 brew install git

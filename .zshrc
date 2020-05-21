@@ -14,6 +14,9 @@ plugins=(
   git-open
 )
 
+autoload -U promptinit; promptinit
+prompt pure
+
 source $ZSH/oh-my-zsh.sh
 
 # Do ls after cd
