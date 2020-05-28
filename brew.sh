@@ -12,11 +12,11 @@ brew upgrade
 # Save Homebrew’s installed location.
 BREW_PREFIX=$(brew --prefix)
 
-# Install languages
+# Install languages etc
 brew install zsh
-brew install php
 brew install node
 brew install git
+brew install yarn
 
 # Install apps
 brew cask install visual-studio-code
@@ -25,7 +25,6 @@ brew cask install spotify
 brew cask install github
 brew cask install slack
 brew cask install iterm2
-brew cask install dropbox
 brew cask install 1password
 
 brew cleanup
