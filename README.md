@@ -1,13 +1,14 @@
 # dotfiles
 
-Dotfiles used by me.
+Dotfiles used by @filipstefansson.
 
-### What it does
+### About
 
 - Installs homebrew
 - Installs git, yarn, node (etc) and a bunch of apps that I use
 - Installs and configures zsh
 - Installs a few vscode plugins
+- Symlinks `.zshrc` to `~/code/dotfiles/.zshrc`
 - Sets a few OSX settings (optional)
 
 ### Usage
