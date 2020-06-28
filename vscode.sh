@@ -9,3 +9,4 @@ code --install-extension mikestead.dotenv
 code --install-extension eamodio.gitlens
 code --install-extension patbenatar.advanced-new-file
 code --install-extension dracula-theme.theme-dracula
+code --install-extension shan.code-settings-sync
