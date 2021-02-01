@@ -1,8 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/filipstefansson/.oh-my-zsh"
 
-ZSH_THEME="vercel"
-
 plugins=(
   git
   node
@@ -14,9 +12,6 @@ plugins=(
   git-open
 )
 
-autoload -U promptinit; promptinit
-prompt pure
-
 ZSH_DISABLE_COMPFIX="true"
 
 source $ZSH/oh-my-zsh.sh
@@ -25,3 +20,12 @@ source $ZSH/oh-my-zsh.sh
 chpwd() {
   ls
 }
+
+# Set Spaceship ZSH as a prompt
+SPACESHIP_PACKAGE_SHOW=false
+SPACESHIP_NODE_SHOW=true
+SPACESHIP_DOCKER_SHOW=false
+autoload -U promptinit; promptinit
+prompt spaceship
+
+ZSH_THEME="spaceship"
