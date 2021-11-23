@@ -7,27 +7,27 @@
 # eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Make sure we’re using the latest Homebrew.
-brew update
+# brew update
 
 # Upgrade any already-installed formulae.
-brew upgrade
+# brew upgrade
 
 # Save Homebrew’s installed location.
-BREW_PREFIX=$(brew --prefix)
+# BREW_PREFIX=$(brew --prefix)
 
 # Install languages etc
-brew install zsh
-brew install git
+# brew install zsh
+# brew install git
 
 # Install apps
-brew cask install visual-studio-code
-brew cask install google-chrome
-brew cask install spotify
-brew cask install github
-brew cask install slack
-brew cask install iterm2
-brew cask install 1password
-brew cask install figma
-brew cask install docker
+brew install --cask visual-studio-code
+brew install --cask google-chrome
+brew install --cask spotify
+brew install --cask github
+brew install --cask slack
+brew install --cask iterm2
+brew install --cask 1password
+brew install --cask figma
+brew install --cask docker
 
 brew cleanup
