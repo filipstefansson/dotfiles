@@ -12,7 +12,5 @@ git pull origin master
 # symlink zshrc file
 ln -sv ~/code/dotfiles/.zshrc ~
 
-source ~/.zshrc
-
 # Install npm packages
 ./npm.sh
