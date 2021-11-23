@@ -3,6 +3,7 @@ export ZSH="/Users/filipstefansson/.oh-my-zsh"
 
 plugins=(
   git
+  zsh-nvm
   node
   yarn
   git-extras
@@ -13,8 +14,6 @@ plugins=(
 )
 
 ZSH_DISABLE_COMPFIX="true"
-
-PATH=/Users/filipstefansson:$PATH
 
 source $ZSH/oh-my-zsh.sh
 
@@ -27,6 +26,9 @@ chpwd() {
 SPACESHIP_PACKAGE_SHOW=false
 SPACESHIP_NODE_SHOW=true
 SPACESHIP_DOCKER_SHOW=false
+SPACESHIP_GCLOUD_SHOW=false
+SPACESHIP_AWS_SHOW=false
+
 autoload -U promptinit; promptinit
 prompt spaceship
 
