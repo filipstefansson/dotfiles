@@ -22,6 +22,7 @@ cd dotfiles
 or manually:
 
 ```sh
+./nvm.sh
 ./brew.sh
 ./zsh.sh
 ./vscode.sh
@@ -30,7 +31,7 @@ ln -sv ~/code/dotfiles/.zshrc ~
 
 ### OSX settings
 
-You can configure a few settings in OSX by running the `.macos` file. It's based on [mths.be/macos](https://mths.be/macos), but I've removed most of it to keep it simple.
+You can configure a few settings in OSX by running the `.macos` file.
 
 ```sh
 ./.macos

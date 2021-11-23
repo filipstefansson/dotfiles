@@ -14,9 +14,7 @@ BREW_PREFIX=$(brew --prefix)
 
 # Install languages etc
 brew install zsh
-brew install node
 brew install git
-brew install yarn
 
 # Install apps
 brew cask install visual-studio-code
@@ -28,6 +26,5 @@ brew cask install iterm2
 brew cask install 1password
 brew cask install figma
 brew cask install docker
-
 
 brew cleanup

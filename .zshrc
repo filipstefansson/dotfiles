@@ -14,6 +14,8 @@ plugins=(
 
 ZSH_DISABLE_COMPFIX="true"
 
+PATH=/Users/filipstefansson:$PATH
+
 source $ZSH/oh-my-zsh.sh
 
 # Do ls after cd

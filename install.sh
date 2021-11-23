@@ -9,8 +9,8 @@ git pull origin master
 # Configure zsh
 ./zsh.sh
 
-# Install VSCode extensions
-./vscode.sh
+# Install nvm
+./nvm.sh
 
 # symlink zshrc file
 ln -sv ~/code/dotfiles/.zshrc ~
