@@ -15,6 +15,8 @@ plugins=(
 
 ZSH_DISABLE_COMPFIX="true"
 
+source $ZSH/oh-my-zsh.sh
+
 # Do ls after cd
 chpwd() {
   ls
@@ -31,5 +33,3 @@ autoload -U promptinit; promptinit
 prompt spaceship
 
 ZSH_THEME="spaceship"
-
-source $ZSH/oh-my-zsh.sh
