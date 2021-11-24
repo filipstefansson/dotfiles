@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
 
 # Install homebrew
-# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-# echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/filipstefansson/.zprofile
-# eval "$(/opt/homebrew/bin/brew shellenv)"
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/filipstefansson/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Make sure we’re using the latest Homebrew.
-# brew update
+brew update
 
 # Upgrade any already-installed formulae.
-# brew upgrade
+brew upgrade
 
 # Save Homebrew’s installed location.
-# BREW_PREFIX=$(brew --prefix)
+BREW_PREFIX=$(brew --prefix)
 
 # Install languages etc
-# brew install zsh
-# brew install git
+brew install zsh
+brew install git
 
 # Install apps
 brew install --cask visual-studio-code
