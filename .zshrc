@@ -1,11 +1,10 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/filipstefansson/.oh-my-zsh"
 
-export NVM_LAZY_LOAD=true
+eval "$(fnm env)"
 
 plugins=(
   git
-  zsh-nvm
   node
   yarn
   git-extras

@@ -22,7 +22,6 @@ cd dotfiles
 or manually:
 
 ```sh
-./nvm.sh
 ./brew.sh
 ./zsh.sh
 ./vscode.sh

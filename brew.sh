@@ -18,6 +18,9 @@ BREW_PREFIX=$(brew --prefix)
 # Install languages etc
 brew install zsh
 brew install git
+brew install tree
+brew install ack
+brew install fnm
 
 # Install apps
 brew install --cask visual-studio-code
