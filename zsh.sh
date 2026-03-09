@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
 
 # oh-my-zsh
-git clone https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
+fi
 
 # Plugins
-git clone https://github.com/paulirish/git-open.git $HOME/.oh-my-zsh/plugins/git-open
-git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-completions $HOME/.oh-my-zsh/custom/plugins/zsh-completions
+clone_plugin() {
+  local dest="$HOME/.oh-my-zsh/custom/plugins/$(basename "$1" .git)"
+  [ -d "$dest" ] || git clone "$1" "$dest"
+}
 
-source ~/.zshrc
-
-source ~/.zshrc
+clone_plugin https://github.com/paulirish/git-open.git &
+clone_plugin https://github.com/zsh-users/zsh-autosuggestions &
+clone_plugin https://github.com/zsh-users/zsh-syntax-highlighting.git &
+clone_plugin https://github.com/zsh-users/zsh-completions &
+wait

@@ -2,9 +2,9 @@
 
 # ~/.macos — https://mths.be/macos
 
-# Close any open System Preferences panes, to prevent them from overriding
+# Close any open System Settings panes, to prevent them from overriding
 # settings we’re about to change
-osascript -e 'tell application "System Preferences" to quit'
+osascript -e ‘tell application "System Settings" to quit’
 
 # Ask for the administrator password upfront
 sudo -v
@@ -14,9 +14,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
-
-# Menu bar: disable transparency
-defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
 # Set sidebar icon size to small
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
@@ -39,17 +36,11 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 # Disable automatic period substitution as it’s annoying when typing code
 defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 
-# Disable smart quotes as they’re annoying when typing code
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-
 # Disable automatic capitalization as it’s annoying when typing code
 defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-
-# Increase sound quality for Bluetooth headphones/headsets
-defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
 
 # Use scroll gesture with the Ctrl (^) modifier key to zoom
 defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
@@ -59,8 +50,14 @@ defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
-# Disable auto-correct
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+# Disable press-and-hold for keys in favor of key repeat
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+# Enable full keyboard access for all controls (Tab in dialogs)
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+# Speed up window resize animations
+defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
@@ -73,9 +70,11 @@ defaults write com.apple.finder ShowPathbar -bool true
 
 # Keep folders on top when sorting by name
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
+defaults write com.apple.finder _FXSortFoldersFirstOnDesktop -bool true
 
-# Finder: allow text selection in Quick Look
-defaults write com.apple.finder QLEnableTextSelection -bool true
+# Group by kind, sort by name within groups
+defaults write com.apple.finder FXPreferredGroupBy -string "Kind"
+defaults write com.apple.finder FXArrangeGroupViewBy -string "Name"
 
 # When performing a search, search the current folder by default
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
@@ -86,13 +85,23 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 # Use columns view in all Finder windows by default
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
+# Show hidden files
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
+# Avoid creating .DS_Store files on network and USB volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# Show full POSIX path in Finder title bar
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
 # Show the /Volumes folder
 sudo chflags nohidden /Volumes
 
-# Set the icon size of Dock items to 36 pixels
+# Set the icon size of Dock items to 54 pixels
 defaults write com.apple.dock tilesize -int 54
 
 # Disable the Launchpad gesture (pinch with thumb and three fingers)
@@ -101,14 +110,47 @@ defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
 # Remove the auto-hiding Dock delay
 defaults write com.apple.dock autohide-delay -float 0
 
-# Don’t display the annoying prompt when quitting iTerm
-defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+# Use scale effect for minimize (faster than genie)
+defaults write com.apple.dock mineffect -string "scale"
+
+# Speed up Mission Control animations
+defaults write com.apple.dock expose-animation-duration -float 0.1
 
 # Disable shadow in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
 # Set standby delay to 24 hours (default is 1 hour)
 sudo pmset -a standbydelay 86400
+
+###############################################################################
+# Safari (Developer)                                                          #
+###############################################################################
+
+# Enable Develop menu and Web Inspector
+defaults write com.apple.Safari IncludeDeveloperMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+
+# Show full URL in address bar
+defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
+
+###############################################################################
+# Terminal                                                                    #
+###############################################################################
+
+# Enable Secure Keyboard Entry in Terminal.app
+defaults write com.apple.terminal SecureKeyboardEntry -bool true
+
+###############################################################################
+# Activity Monitor                                                            #
+###############################################################################
+
+# Show all processes
+defaults write com.apple.ActivityMonitor ShowCategory -int 0
+
+# Sort by CPU usage
+defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
+defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 ###############################################################################
 # Mail                                                                        #
@@ -128,17 +170,13 @@ defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
 # Kill affected applications
 
 for app in "Activity Monitor" \
-	"Address Book" \
-	"Calendar" \
 	"cfprefsd" \
-	"Contacts" \
 	"Dock" \
 	"Finder" \
-	"Google Chrome Canary" \
-	"Google Chrome" \
-	"Messages" \
-	"Photos" \
-	"SystemUIServer"; do
+	"Mail" \
+	"Safari" \
+	"SystemUIServer" \
+	"Terminal"; do
 	killall "${app}" &> /dev/null
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."

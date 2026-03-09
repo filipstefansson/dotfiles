@@ -1,0 +1,17 @@
+# Ghostty terminal config
+# Docs: https://ghostty.org/docs/config
+
+# Typography
+font-size = 14
+font-thicken = true
+
+# Window
+window-padding-x = 10
+window-padding-y = 10
+background-opacity = 0.95
+
+# Cursor
+cursor-style = bar
+
+# Theme
+theme = Catppuccin Mocha

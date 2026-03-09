@@ -1,0 +1,18 @@
+# Starship prompt config
+# Docs: https://starship.rs/config/
+
+# Disable noisy modules
+[package]
+disabled = true
+
+[docker_context]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[aws]
+disabled = true
+
+[nodejs]
+detect_extensions = []

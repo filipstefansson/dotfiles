@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
 # Install homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+if ! command -v brew &>/dev/null; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/filipstefansson/.zprofile
+# Add brew to PATH (idempotent)
+if ! grep -q 'brew shellenv' "$HOME/.zprofile" 2>/dev/null; then
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$HOME/.zprofile"
+fi
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Make sure we’re using the latest Homebrew.
@@ -12,25 +17,12 @@ brew update
 # Upgrade any already-installed formulae.
 brew upgrade
 
-# Save Homebrew’s installed location.
-BREW_PREFIX=$(brew --prefix)
-
-# Install languages etc
-brew install zsh
-brew install git
-brew install tree
-brew install ack
-brew install fnm
+# Install CLI tools
+brew install zsh git fnm eza zoxide pnpm starship bat gh fd ripgrep jq fzf
 
 # Install apps
-brew install --cask visual-studio-code
-brew install --cask google-chrome
-brew install --cask spotify
-brew install --cask github
-brew install --cask slack
-brew install --cask iterm2
-brew install --cask 1password
-brew install --cask figma
-brew install --cask docker
+brew install --cask visual-studio-code google-chrome spotify github slack \
+  ghostty 1password figma raycast cleanshot chatgpt codex stats claude \
+  betterdisplay syntax-highlight qlmarkdown
 
 brew cleanup
