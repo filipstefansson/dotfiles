@@ -1,0 +1,16 @@
+# Machine-local shell additions. Copy to ~/.config/zsh/local.zsh.
+#
+# Keep paths and tool setup here if they are specific to one Mac.
+
+# Flutter / Dart
+# export PATH="$HOME/code/other/flutter/bin:$PATH"
+# export PATH="$HOME/.pub-cache/bin:$PATH"
+
+# Android
+# export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
+
+# Shorebird
+# export PATH="$HOME/.shorebird/bin:$PATH"
+
+# Rust
+# [[ -r "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"

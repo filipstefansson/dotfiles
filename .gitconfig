@@ -11,6 +11,24 @@
 [push]
 	autoSetupRemote = true
 
+[fetch]
+	prune = true
+
+[rebase]
+	updateRefs = true
+
+[diff]
+	algorithm = histogram
+
+[merge]
+	conflictstyle = zdiff3
+
+[branch]
+	sort = -committerdate
+
+[column]
+	ui = auto
+
 [rerere]
 	enabled = true
 

@@ -2,16 +2,18 @@
 # Docs: https://ghostty.org/docs/config
 
 # Typography
+font-family = "SF Mono"
 font-size = 14
-font-thicken = true
+font-thicken = false
 
 # Window
 window-padding-x = 10
 window-padding-y = 10
-background-opacity = 0.95
+background-opacity = 1.0
+copy-on-select = true
 
 # Cursor
 cursor-style = bar
 
 # Theme
-theme = Catppuccin Mocha
+theme = Ghostty Default Style Dark

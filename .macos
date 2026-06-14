@@ -4,7 +4,7 @@
 
 # Close any open System Settings panes, to prevent them from overriding
 # settings we’re about to change
-osascript -e ‘tell application "System Settings" to quit’
+osascript -e 'tell application "System Settings" to quit'
 
 # Ask for the administrator password upfront
 sudo -v
@@ -104,9 +104,6 @@ sudo chflags nohidden /Volumes
 # Set the icon size of Dock items to 54 pixels
 defaults write com.apple.dock tilesize -int 54
 
-# Disable the Launchpad gesture (pinch with thumb and three fingers)
-defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
-
 # Remove the auto-hiding Dock delay
 defaults write com.apple.dock autohide-delay -float 0
 
@@ -125,6 +122,9 @@ sudo pmset -a standbydelay 86400
 ###############################################################################
 # Safari (Developer)                                                          #
 ###############################################################################
+# Note: recent macOS sandboxes com.apple.Safari, so several of these `defaults`
+# writes may be ignored unless Terminal has Full Disk Access (or are set in the
+# Safari UI). Harmless if they no-op.
 
 # Enable Develop menu and Web Inspector
 defaults write com.apple.Safari IncludeDeveloperMenu -bool true

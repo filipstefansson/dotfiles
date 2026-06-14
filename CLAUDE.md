@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Personal macOS dotfiles. Manages shell (zsh), Homebrew packages/casks, Node.js (via fnm), and macOS system preferences.
+Personal macOS dotfiles. Manages shell (zsh), Homebrew packages/casks, Node.js (via fnm), Python tooling (via uv), Java tooling (Homebrew OpenJDK), and macOS system preferences.
 
 ## Installation
 
@@ -16,19 +16,24 @@ Personal macOS dotfiles. Manages shell (zsh), Homebrew packages/casks, Node.js (
 ## Architecture
 
 - **install.sh** — Entry point. Pulls latest, runs all setup scripts, symlinks `.zshrc`
-- **brew.sh** — Installs Homebrew, CLI tools (git, fnm, eza, zoxide, pnpm, starship, bat, gh, fd, ripgrep, jq), and GUI apps via casks (VS Code, Chrome, Ghostty, etc.)
+- **Brewfile** — Declarative list of Homebrew formulae and casks.
+- **brew.sh** — Installs Homebrew, updates/upgrade packages, runs `brew bundle` against `Brewfile`, then cleans Homebrew caches.
 - **zsh.sh** — Installs Oh-My-Zsh and custom plugins (git-open, zsh-autosuggestions, zsh-syntax-highlighting, zsh-completions)
-- **npm.sh** — Installs Node.js v22 (LTS) via fnm and sets up pnpm
-- **.zshrc** — Shell config: Oh-My-Zsh with Starship prompt, eza/zoxide integration, fnm init, auto-ls on cd
+- **npm.sh** — Installs Node.js v24 (LTS) via fnm and a default Python via uv
+- **.zshrc** — Shell config: Oh-My-Zsh with Starship prompt, guarded eza/zoxide/fnm/fzf/bat integrations, `~/.local/bin` (uv Python shims) on PATH, Homebrew OpenJDK setup, auto-ls on cd
+- **.config/zsh/local.zsh.example** — Template for machine-specific paths such as Flutter, Android, Shorebird, and Rust.
 - **.macos** — macOS system preference tweaks (keyboard, Finder, Dock, Mail, screenshots, etc.)
 
 ## Key Details
 
 - Node version management uses **fnm** (not nvm)
 - Package management uses **pnpm** as the primary package manager
+- Python uses **uv** end to end — it installs the default interpreter (`uv python install --default`, shims in `~/.local/bin`) and handles project/tool workflows
+- Java uses **Homebrew OpenJDK pinned to `openjdk@21`** (LTS) for the machine-level JDK — chosen for Android/Flutter/Gradle compatibility (latest `openjdk` is too new for AGP)
 - Shell prompt is **Starship** (installed via Homebrew, configured in `.config/starship.toml`)
 - **eza** replaces `ls` and `tree` — aliased in `.zshrc`
 - **zoxide** replaces `cd` — initialized in `.zshrc` with a Claude Code guard (`CLAUDECODE` env var)
 - Terminal emulator is **Ghostty** (replaced iTerm2)
 - `.zshrc` is symlinked from repo to `~/.zshrc` — edits here are the source of truth
+- Machine-specific shell paths should go in `~/.config/zsh/local.zsh`, not directly in `.zshrc`
 - All scripts are bash (`#!/usr/bin/env bash`) except the shell config which is zsh
