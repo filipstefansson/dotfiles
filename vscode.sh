@@ -9,30 +9,16 @@ if ! command -v code &>/dev/null; then
   exit 0
 fi
 
+# Bare minimum for TS/Next.js and Flutter dev.
 extensions=(
-  a5huynh.vscode-ron
-  alefragnani.project-manager
-  bradlc.vscode-tailwindcss
-  dart-code.dart-code
-  dart-code.flutter
+  # TypeScript / Next.js
   dbaeumer.vscode-eslint
-  eamodio.gitlens
   esbenp.prettier-vscode
-  github.vscode-github-actions
-  graphql.vscode-graphql
-  graphql.vscode-graphql-syntax
-  irongeek.vscode-env
-  kevinrose.vsc-python-indent
-  mechatroner.rainbow-csv
-  ms-python.debugpy
-  ms-python.python
-  ms-python.vscode-pylance
-  ms-python.vscode-python-envs
-  patbenatar.advanced-new-file
-  unifiedjs.vscode-mdx
-  vue.volar
+  bradlc.vscode-tailwindcss
   yoavbls.pretty-ts-errors
-  yzhang.markdown-all-in-one
+  # Flutter / Dart
+  dart-code.flutter
+  dart-code.dart-code
 )
 
 for ext in "${extensions[@]}"; do
