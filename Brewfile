@@ -23,6 +23,7 @@ brew "lazygit"
 brew "btop"
 brew "openjdk@21"
 brew "uv"
+brew "mas"
 
 # Apps
 cask "1password"
@@ -44,3 +45,9 @@ cask "stats"
 cask "syntax-highlight"
 cask "visual-studio-code"
 cask "xcodes-app"
+
+# Mac App Store apps (requires being signed into the App Store)
+mas "TestFlight", id: 899247664
+mas "Amphetamine", id: 937984704
+mas "1Password for Safari", id: 1569813296
+mas "AdGuard for Safari", id: 1440147259
