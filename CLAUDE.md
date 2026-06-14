@@ -42,3 +42,17 @@ Personal macOS dotfiles. Manages shell (zsh), Homebrew packages/casks, Node.js (
 - Machine-specific shell paths should go in `~/.config/zsh/local.zsh`, not directly in `.zshrc`
 - All scripts are bash (`#!/usr/bin/env bash`) except the shell config which is zsh
 - Git uses **git-delta** as the pager/diff viewer, a global ignore file (`.gitignore_global` via `core.excludesfile`), and **1Password's SSH agent** for commit signing (`gpg.format = ssh`)
+
+## Agent machine (this box only — NOT part of the default install)
+
+One machine doubles as an always-on agent/CI box. It's a **two-layer** setup:
+
+- **Layer 1 — identical dev machine.** `./install.sh` exactly as on any other Mac. Nothing below changes Layer 1, so the repo stays portable.
+- **Layer 2 — runner overlay.** `./agent.sh`, run **once on this box, after** `install.sh`. Order: wipe → `install.sh` → `agent.sh`. `agent.sh` is **never** called by `install.sh`.
+
+- **agent.sh** — Idempotent overlay. Always-on power settings (`pmset` auto-restart on power loss/freeze; Amphetamine handles keep-awake; auto-login is a guided manual step), Tailscale + SSH, installs `fastlane` (Layer-2 only — deliberately not in the shared Brewfile), writes the runner toolchain env, then registers the runners in `runners.conf`. Registration tokens are minted on the fly via `gh api` (needs `gh` authed with admin scope) — nothing is stored.
+- **runners.conf** — One line per runner (`name  scope-url  labels`). One **org-level** runner covers all of an org's private repos; **personal repos each need their own repo-level line** (user accounts have no account-wide runner level). Keep it short — each runner = 1 concurrent job on old hardware.
+- **~/runners/** — Per-runner dirs + `agent-env.sh`. Runners are **native + persistent** (no Docker: macOS can't containerize Xcode/iOS; `container:` jobs are Linux-only). Jobs run non-interactive, so a `.path` file per runner puts cargo/node/brew on PATH — this is what makes **Rust/Bevy** jobs work (base `rust.sh` toolchain is sufficient; no extra system deps for Bevy on macOS).
+- **External SSD (`$CI_VOLUME`, default `/Volumes/CI`)** — Holds only **bulk, regenerable** data so the 512 internal disk doesn't fill: `CARGO_TARGET_DIR` + `SCCACHE_DIR` (set in each runner's `.env` + `agent-env.sh`), runner `_work` dirs (`config.sh --work`), and symlinked Xcode `DerivedData`/`Archives`/`iOS DeviceSupport` + CoreSimulator `Devices`. Toolchains/config stay internal, so the box still works (cold) if the drive drops. `agent.sh` **aborts** if the drive isn't mounted (never silently uses the internal disk); add the printed snippet to `local.zsh` for interactive builds.
+- **examples/ci/** — Reference files for the *app* repos (not used by this repo): `ios-release.yml`, `Fastfile`, and `secrets.md`. iOS submission is fully automated via **`fastlane match` + a throwaway CI keychain** (`setup_ci`) and an **App Store Connect API key** — so signing never uses the login keychain, 1Password, or 2FA. **Git commit signing is skipped in CI** (the 1Password SSH agent can't run headless).
+- **Future:** containerized non-iOS jobs should go to a **separate Linux runner**, not this Mac.

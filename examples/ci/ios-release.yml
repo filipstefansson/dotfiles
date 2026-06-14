@@ -1,0 +1,29 @@
+# Reference workflow for an iOS app repo — copy to .github/workflows/ in that repo.
+# Runs on this Mac's self-hosted runner and submits to TestFlight, fully unattended.
+# Apple signing uses a throwaway CI keychain via `fastlane match` (setup_ci), so it
+# never touches the login keychain or 1Password, and uses an App Store Connect API
+# key instead of an Apple ID + 2FA.
+name: iOS Release
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+jobs:
+  release:
+    # Target this machine deliberately via labels (see runners.conf).
+    runs-on: [self-hosted, macos, agent]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build, sign, and upload to TestFlight
+        run: fastlane ios beta
+        env:
+          # Decrypts certs/profiles pulled by `match` into the temp CI keychain.
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          # App Store Connect API key (no Apple ID / 2FA needed for upload).
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.ASC_KEY_P8 }}
