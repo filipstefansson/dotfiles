@@ -16,9 +16,12 @@ extensions=(
   esbenp.prettier-vscode
   bradlc.vscode-tailwindcss
   yoavbls.pretty-ts-errors
+  unifiedjs.vscode-mdx
   # Flutter / Dart
   dart-code.flutter
   dart-code.dart-code
+  # Git
+  eamodio.gitlens
 )
 
 for ext in "${extensions[@]}"; do
