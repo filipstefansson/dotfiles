@@ -8,8 +8,8 @@ Personal macOS dotfiles. Manages shell (zsh), Homebrew packages/casks, Node.js (
 
 ## Installation
 
-- Full install: `./install.sh` (runs brew.sh, zsh.sh, npm.sh, rust.sh, vscode.sh, symlinks dotfiles)
-- Individual scripts can be run standalone: `./brew.sh`, `./zsh.sh`, `./npm.sh`, `./rust.sh`, `./vscode.sh`
+- Full install: `./install.sh` (runs brew.sh, zsh.sh, npm.sh, rust.sh, vscode.sh, skills.sh, symlinks dotfiles)
+- Individual scripts can be run standalone: `./brew.sh`, `./zsh.sh`, `./npm.sh`, `./rust.sh`, `./vscode.sh`, `./skills.sh`
 - macOS preferences: `./.macos` (review before running — sets keyboard, Finder, Dock, etc.)
 - The repo path is auto-detected by `install.sh` — it can live anywhere
 
@@ -22,6 +22,7 @@ Personal macOS dotfiles. Manages shell (zsh), Homebrew packages/casks, Node.js (
 - **npm.sh** — Installs Node.js v24 (LTS) via fnm and a default Python via uv
 - **vscode.sh** — Installs VS Code extensions declaratively (`code --install-extension`, idempotent)
 - **rust.sh** — Installs the Rust toolchain via rustup, adds clippy/rustfmt/rust-analyzer, and installs cargo-nextest/bacon via cargo-binstall
+- **skills.sh** — Reinstalls agent skills via the `skills` CLI (`npx skills add <repo>`), installed globally and symlinked into Claude + Codex. Runs after npm.sh (needs Node)
 - **.zshrc** — Shell config: Oh-My-Zsh with Starship prompt, guarded eza/zoxide/fnm/fzf/bat integrations, `~/.local/bin` (uv Python shims) on PATH, Homebrew OpenJDK setup, auto-ls on cd
 - **.config/zsh/local.zsh.example** — Template for machine-specific paths such as Flutter, Android, Shorebird, and Rust.
 - **.macos** — macOS system preference tweaks (keyboard, Finder, Dock, Mail, screenshots, etc.)

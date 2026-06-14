@@ -25,6 +25,9 @@ wait
 # Install VS Code extensions (no-op if the `code` CLI isn't on PATH yet)
 "$DOTFILES_DIR/vscode.sh"
 
+# Reinstall agent skills (needs Node from npm.sh above)
+"$DOTFILES_DIR/skills.sh"
+
 # Symlink dotfiles
 ln -sfnv "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 ln -sfnv "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
