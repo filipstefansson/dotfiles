@@ -1,0 +1,11 @@
+# Managed by dotfiles — symlinked to ~/.cargo/config.toml.
+# Faster local Rust builds.
+
+[build]
+# Cache compiled artifacts across projects/builds (requires sccache on PATH).
+rustc-wrapper = "sccache"
+
+[target.aarch64-apple-darwin]
+# Optimize for this machine's CPU. Great for local dev binaries; don't use this
+# for artifacts you ship to other machines.
+rustflags = ["-C", "target-cpu=native"]

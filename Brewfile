@@ -25,6 +25,11 @@ brew "openjdk@21"
 brew "uv"
 brew "mas"
 
+# Rust (toolchain installed via rust.sh; these are the supporting tools)
+brew "rustup"
+brew "sccache"
+brew "cargo-binstall"
+
 # Apps
 cask "1password"
 cask "betterdisplay"

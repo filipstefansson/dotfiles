@@ -18,6 +18,9 @@ if [[ -n "${HOMEBREW_PREFIX:-}" && -d "$HOMEBREW_PREFIX/opt/openjdk@21/libexec/o
   path=("$JAVA_HOME/bin" "${path[@]}")
 fi
 
+# Rust (rustup/cargo) — adds ~/.cargo/bin to PATH.
+[[ -r "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+
 # Machine-local additions belong here, not in the shared dotfiles.
 [[ -r "$HOME/.config/zsh/local.zsh" ]] && source "$HOME/.config/zsh/local.zsh"
 

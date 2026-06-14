@@ -67,6 +67,10 @@ uv
 
 Homebrew OpenJDK (`openjdk@21`, the current LTS) is the system-level JDK — pinned to 21 for Android/Flutter/Gradle compatibility. The shell exports `JAVA_HOME` and prepends the JDK `bin` directory because Homebrew keeps OpenJDK keg-only.
 
+### Rust
+
+`rustup` manages the toolchain. `rust.sh` installs it, runs `rustup update stable`, adds the `clippy`/`rustfmt`/`rust-analyzer` components, and installs `cargo-nextest` and `bacon` via `cargo-binstall`. The shell sources `~/.cargo/env` to put `~/.cargo/bin` on PATH, and `~/.cargo/config.toml` (symlinked) enables `sccache` caching and `target-cpu=native` for faster local builds.
+
 ### Usage
 
 ```sh

@@ -12,5 +12,4 @@
 # Shorebird
 # export PATH="$HOME/.shorebird/bin:$PATH"
 
-# Rust
-# [[ -r "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+# Note: Rust is set up in the base dotfiles (rust.sh + .zshrc), not here.

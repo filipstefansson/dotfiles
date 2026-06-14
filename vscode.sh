@@ -20,6 +20,8 @@ extensions=(
   # Flutter / Dart
   dart-code.flutter
   dart-code.dart-code
+  # Rust
+  rust-lang.rust-analyzer
   # Git
   eamodio.gitlens
 )
