@@ -12,6 +12,42 @@ Dotfiles used by @filipstefansson.
 - Symlinks Starship and Ghostty config from `.config`
 - Sets a few OSX settings (optional)
 
+### New machine setup
+
+Day-of steps for a fresh macOS install, in order (a couple of steps have ordering gotchas):
+
+1. **Sign into 1Password** and enable its SSH agent — Settings → Developer →
+   _Use the SSH agent_. Commit signing (below) depends on it.
+2. **Install Xcode Command Line Tools** (Homebrew needs them):
+   ```sh
+   xcode-select --install
+   ```
+3. **Clone and install:**
+   ```sh
+   git clone https://github.com/filipstefansson/dotfiles ~/code/other/dotfiles
+   cd ~/code/other/dotfiles
+   ./install.sh
+   ```
+   This installs Homebrew + everything in the `Brewfile`, configures zsh, installs
+   Node (fnm) and Python (uv), installs VS Code extensions, and symlinks the
+   dotfiles. The repo can live anywhere — paths are auto-detected.
+4. **Enable the `code` CLI:** open VS Code once, run _Shell Command: Install 'code'
+   command in PATH_ from the command palette, then re-run `./vscode.sh` to install
+   extensions (the first pass is skipped if `code` wasn't on PATH yet).
+5. **Turn on Git commit signing:** in 1Password create/open an SSH key, then in
+   `.gitconfig` paste its public key into `user.signingkey` and set
+   `commit.gpgsign = true`. Add the same key to GitHub as a **Signing** key
+   (Settings → SSH and GPG keys → New → type: Signing) for the _Verified_ badge.
+   Full steps are commented inline in `.gitconfig`.
+6. **Machine-specific paths** (Flutter, Android, etc.) go in `~/.config/zsh/local.zsh`
+   — `install.sh` seeds it from the example on first run.
+7. **macOS preferences** (optional, review first), then log out/in:
+   ```sh
+   ./.macos
+   ```
+
+Re-running `./install.sh` later is idempotent — it pulls latest and re-applies everything.
+
 ### Python
 
 `uv` manages Python end to end — interpreters and project/tool workflows. `npm.sh`
