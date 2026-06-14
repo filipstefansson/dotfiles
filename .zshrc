@@ -43,6 +43,17 @@ HISTSIZE=50000
 SAVEHIST=50000
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
+setopt SHARE_HISTORY        # share history across open shells
+setopt EXTENDED_HISTORY     # record timestamps
+setopt INC_APPEND_HISTORY   # append as commands run, not on exit
+setopt HIST_VERIFY          # confirm before running an expanded !history line
+setopt HIST_IGNORE_SPACE    # don't record commands prefixed with a space
+
+# Aliases
+alias reload='exec zsh'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
 # Editor
 export EDITOR="code --wait"

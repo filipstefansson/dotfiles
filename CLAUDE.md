@@ -8,8 +8,8 @@ Personal macOS dotfiles. Manages shell (zsh), Homebrew packages/casks, Node.js (
 
 ## Installation
 
-- Full install: `./install.sh` (runs brew.sh, zsh.sh, npm.sh, symlinks .zshrc)
-- Individual scripts can be run standalone: `./brew.sh`, `./zsh.sh`, `./npm.sh`
+- Full install: `./install.sh` (runs brew.sh, zsh.sh, npm.sh, vscode.sh, symlinks dotfiles)
+- Individual scripts can be run standalone: `./brew.sh`, `./zsh.sh`, `./npm.sh`, `./vscode.sh`
 - macOS preferences: `./.macos` (review before running — sets keyboard, Finder, Dock, etc.)
 - The repo path is auto-detected by `install.sh` — it can live anywhere
 
@@ -20,6 +20,7 @@ Personal macOS dotfiles. Manages shell (zsh), Homebrew packages/casks, Node.js (
 - **brew.sh** — Installs Homebrew, updates/upgrade packages, runs `brew bundle` against `Brewfile`, then cleans Homebrew caches.
 - **zsh.sh** — Installs Oh-My-Zsh and custom plugins (git-open, zsh-autosuggestions, zsh-syntax-highlighting, zsh-completions)
 - **npm.sh** — Installs Node.js v24 (LTS) via fnm and a default Python via uv
+- **vscode.sh** — Installs VS Code extensions declaratively (`code --install-extension`, idempotent)
 - **.zshrc** — Shell config: Oh-My-Zsh with Starship prompt, guarded eza/zoxide/fnm/fzf/bat integrations, `~/.local/bin` (uv Python shims) on PATH, Homebrew OpenJDK setup, auto-ls on cd
 - **.config/zsh/local.zsh.example** — Template for machine-specific paths such as Flutter, Android, Shorebird, and Rust.
 - **.macos** — macOS system preference tweaks (keyboard, Finder, Dock, Mail, screenshots, etc.)
@@ -37,3 +38,4 @@ Personal macOS dotfiles. Manages shell (zsh), Homebrew packages/casks, Node.js (
 - `.zshrc` is symlinked from repo to `~/.zshrc` — edits here are the source of truth
 - Machine-specific shell paths should go in `~/.config/zsh/local.zsh`, not directly in `.zshrc`
 - All scripts are bash (`#!/usr/bin/env bash`) except the shell config which is zsh
+- Git uses **git-delta** as the pager/diff viewer, a global ignore file (`.gitignore_global` via `core.excludesfile`), and **1Password's SSH agent** for commit signing (`gpg.format = ssh`)

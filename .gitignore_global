@@ -1,0 +1,37 @@
+# Global gitignore — symlinked to ~/.gitignore_global, set via core.excludesfile.
+# For junk that should never be committed in ANY repo.
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Editors / IDEs
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+*.swp
+*.swo
+*~
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Node
+node_modules/
+
+# Logs / misc
+*.log
+.direnv/

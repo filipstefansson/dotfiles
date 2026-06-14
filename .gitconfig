@@ -1,9 +1,41 @@
 [user]
 	name = Filip Stefansson
 	email = filip.stefansson@gmail.com
+	# Commit signing via the 1Password SSH agent. To enable on a new machine:
+	#   1. In 1Password, create a new SSH key (or open an existing one).
+	#   2. 1Password → Settings → Developer → "Use the SSH agent" + "Sign Git
+	#      commits" (this also offers to write the config below for you).
+	#   3. Paste the key's PUBLIC part here, then set commit.gpgsign = true.
+	#   4. Add the same public key to GitHub as a *Signing* key for the
+	#      "Verified" badge (Settings → SSH and GPG keys → New, type: Signing).
+	# signingkey = ssh-ed25519 AAAA...PASTE_FROM_1PASSWORD
 
 [init]
 	defaultBranch = main
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[commit]
+	# Flip to true once signingkey above is set and the 1Password agent is on.
+	gpgsign = false
+
+[tag]
+	gpgsign = false
+
+[core]
+	excludesfile = ~/.gitignore_global
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	line-numbers = true
 
 [pull]
 	rebase = true
@@ -19,6 +51,7 @@
 
 [diff]
 	algorithm = histogram
+	colorMoved = default
 
 [merge]
 	conflictstyle = zdiff3

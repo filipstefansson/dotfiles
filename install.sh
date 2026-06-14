@@ -21,9 +21,13 @@ fi
 "$DOTFILES_DIR/npm.sh" &
 wait
 
+# Install VS Code extensions (no-op if the `code` CLI isn't on PATH yet)
+"$DOTFILES_DIR/vscode.sh"
+
 # Symlink dotfiles
 ln -sfnv "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 ln -sfnv "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
+ln -sfnv "$DOTFILES_DIR/.gitignore_global" "$HOME/.gitignore_global"
 ln -sfnv "$DOTFILES_DIR/.hushlogin" "$HOME/.hushlogin"
 
 # Symlink configs
