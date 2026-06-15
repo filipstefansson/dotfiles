@@ -40,6 +40,12 @@ ln -sfnv "$DOTFILES_DIR/.config/starship.toml" "$HOME/.config/starship.toml"
 ln -sfnv "$DOTFILES_DIR/.config/ghostty/config" "$HOME/.config/ghostty/config"
 ln -sfnv "$DOTFILES_DIR/.cargo/config.toml" "$HOME/.cargo/config.toml"
 
+# VS Code keybindings (macOS path)
+VSCODE_USER_DIR="$HOME/Library/Application Support/Code/User"
+if [ -d "$VSCODE_USER_DIR" ]; then
+  ln -sfnv "$DOTFILES_DIR/.config/vscode/keybindings.json" "$VSCODE_USER_DIR/keybindings.json"
+fi
+
 if [ ! -e "$HOME/.config/zsh/local.zsh" ]; then
   cp -nv "$DOTFILES_DIR/.config/zsh/local.zsh.example" "$HOME/.config/zsh/local.zsh"
 fi
