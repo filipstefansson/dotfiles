@@ -98,6 +98,11 @@ if [[ -o interactive && -t 0 && -t 1 && "$TERM" != "dumb" ]] && _has fzf; then
   source <(fzf --zsh)
 fi
 
+# Agent CLIs — always run with permission/approval gates off.
+# Bypass with `command claude` / `command codex` when you want the prompts back.
+_has claude && claude() { command claude --dangerously-skip-permissions "$@"; }
+_has codex  && codex()  { command codex --dangerously-bypass-approvals-and-sandbox "$@"; }
+
 # Starship prompt
 if [[ -o interactive && "$TERM" != "dumb" ]] && _has starship; then
   eval "$(starship init zsh)"
